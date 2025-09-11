@@ -187,7 +187,7 @@ const products = [
     product_image: "https://res.cloudinary.com/dpleitc1d/image/upload/v1756821121/F-FRIEZA_uuk2pg.webp",
     product_image02: "https://res.cloudinary.com/dpleitc1d/image/upload/v1756819339/B-FRIEZA_xcbllv.webp",
     product_icon: "arcticons:dbz",
-    product_name: "Frieza",
+    product_name: "Vegeta",
     product_category_key: "regular_tshirt",
     product_color: "",
     product_selling: 23.75,
