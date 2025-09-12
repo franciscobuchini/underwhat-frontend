@@ -3,7 +3,6 @@ import PicGallery from '../components/PicGallery';
 import ProductList from '../components/ProductList';
 import SizesTable from '../components/SizesTable';
 import Title from '../components/Title';
-import StatsHeader from '../components/StatsHeader';
 import { useTranslation } from 'react-i18next';
 
 const Home = () => {
