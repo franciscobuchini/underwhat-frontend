@@ -158,8 +158,8 @@ const products = [
     units_sold: 0,
   },
     {
-    product_image: "https://res.cloudinary.com/dpleitc1d/image/upload/v1752353261/sl_f_maplered_ihokz7.webp",
-    product_image02: "https://res.cloudinary.com/dpleitc1d/image/upload/v1752353264/sl_b_maplered_mopluu.webp",
+    product_image: "https://res.cloudinary.com/dpleitc1d/image/upload/v1757708844/F-SEKTOR_uun85d.webp",
+    product_image02: "https://res.cloudinary.com/dpleitc1d/image/upload/v1757708843/B-SEKTOR_m1l7jq.webp",
     product_icon: "arcticons:mortal-kombat",
     product_name: "Sektor",
     product_category_key: "sleeveless_shirt",
@@ -171,8 +171,8 @@ const products = [
     units_sold: 0,
   },
     {
-    product_image: "https://res.cloudinary.com/dpleitc1d/image/upload/v1752353261/sl_f_seagull_ezxrrj.webp",
-    product_image02: "https://res.cloudinary.com/dpleitc1d/image/upload/v1752353261/sl_b_seagull_uwfdgk.webp",
+    product_image: "https://res.cloudinary.com/dpleitc1d/image/upload/v1757708846/F-BARAKA_nfowyc.webp",
+    product_image02: "https://res.cloudinary.com/dpleitc1d/image/upload/v1757708844/B-BARAKA_oxxxz3.webp",
     product_icon: "arcticons:mortal-kombat",
     product_name: "Baraka",
     product_category_key: "sleeveless_shirt",
@@ -184,8 +184,8 @@ const products = [
     units_sold: 0,
   },
     {
-    product_image: "https://res.cloudinary.com/dpleitc1d/image/upload/v1752353261/sl_f_black_gezkaw.webp",
-    product_image02: "https://res.cloudinary.com/dpleitc1d/image/upload/v1752353260/sl_b_black_bhypw9.webp",
+    product_image: "https://res.cloudinary.com/dpleitc1d/image/upload/v1757708847/F-NOOBSAIBOT_diijoj.webp",
+    product_image02: "https://res.cloudinary.com/dpleitc1d/image/upload/v1757708844/B-NOOBSAIBOT_eg1lyj.webp",
     product_icon: "arcticons:mortal-kombat",
     product_name: "Noob Saibot",
     product_category_key: "sleeveless_shirt",
@@ -197,8 +197,8 @@ const products = [
     units_sold: 1,
   },
     {
-    product_image: "https://res.cloudinary.com/dpleitc1d/image/upload/v1752353261/sl_f_gray_qjtzix.webp",
-    product_image02: "https://res.cloudinary.com/dpleitc1d/image/upload/v1752353260/sl_b_gray_yedwoq.webp",
+    product_image: "https://res.cloudinary.com/dpleitc1d/image/upload/v1757708845/F-SMOKE_qf5aat.webp",
+    product_image02: "https://res.cloudinary.com/dpleitc1d/image/upload/v1757708844/B-SMOKE_iq6fzy.webp",
     product_icon: "arcticons:mortal-kombat",
     product_name: "Smoke",
     product_category_key: "sleeveless_shirt",
