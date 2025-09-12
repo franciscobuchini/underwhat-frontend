@@ -28,8 +28,8 @@ export default function ProductList() {
     sleeveless_shirt: ["XS","S","M","L","XL","2XL"],
     oversized_tshirt: ["S","M","L","XL","2XL"],
     zip_hoodie: ["XS","S","M","L","XL","2XL"],
-    hoodie: ["XS","S","M","L","XL"],
-    sweatshirt: ["XS","S","M","L","XL"],
+    hoodie: ["XS","S","M","L","XL","2XL","3XL"],
+    sweatshirt: ["XS","S","M","L","XL","2XL", "3XL"],
     shorts: ["US 28","US 29","US 30","US 32","US 33","US 34","US 36"],
   };
 
