@@ -45,7 +45,7 @@
       "size": "Talla",
       "pieces": "Piezas",
       "remove": "Eliminar",
-      "minimum_order": "Min: 2 productos",
+      "minimum_order": "Min: 3 productos",
       "subtotal_without_shipping": "Subtotal (sin envío):"
   },
 
@@ -169,7 +169,7 @@
       "address_number": "Número de dirección",
       "apartment_suite": "Apartamento, Suite, etc.",
       "zip_code": "Código postal",
-      "relevant_shipping_info": "Información relevante para el repartidor:",
+      "relevant_shipping_info": "Información relevante para empresa de transporte:",
       "shipping_info_placeholder": "Puerta trasera, toque el timbre, etc.",
       "relevant_forUs_info": "Información relevante para nosotros:",
       "forUs_info_placeholder": "Déjanos saber si tienes alguna solicitud especial",
@@ -179,7 +179,7 @@
       "last_name": "Apellido",
       "last_name_placeholder": "Apellido",
       "email": "Correo electrónico",
-      "area_code": "Código de área",
+      "area_code": "Código de área del país",
       "phone_number": "Número de teléfono",
       "validations": "Validaciones",
       "validation_text": "El enlace de pago se enviará a la dirección de correo electrónico proporcionada. Tenga en cuenta que este correo no es automático y puede demorar en ser enviado. Una vez recibido, significa que estamos al tanto de su pedido. Su pedido comenzará la producción una vez que se reciba el pago. Al marcar esta casilla, confirma que ha leído y comprendido esta información.",

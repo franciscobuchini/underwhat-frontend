@@ -60,16 +60,6 @@ function AppContent() {
       <CartProvider>
         <div className="flex flex-col min-h-screen bg-gray-50 overflow-x-hidden">
           <Header />
-          {/* Banner solo en Home */}
-          {location.pathname === '/' && (
-            <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] max-w-none">
-              <img
-                src="https://res.cloudinary.com/dpleitc1d/image/upload/v1757712768/Instagram_post_-_24_m5avvc.webp"
-                alt="Banner"
-                className="w-full object-cover transition-all duration-300 ease-in-out h-[400px] sm:h-[350px] md:h-[400px] lg:h-[450px] xl:h-[450px]"
-              />
-            </div>
-          )}
           <ScrollToTop />
           <main className="flex-1 mt-20 mx-1 md:mx-4">
             <Routes>

@@ -14,6 +14,7 @@
     "@headlessui/react": "^2.2.4",
     "@iconify/react": "^5.2.0",
     "axios": "^1.7.9",
+    "framer-motion": "^12.23.13",
     "i18next": "^24.2.2",
     "lodash": "^4.17.21",
     "notyf": "^3.10.0",

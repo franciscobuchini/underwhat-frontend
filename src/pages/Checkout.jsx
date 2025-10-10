@@ -1,150 +1,179 @@
-//Checkout.jsx
-import { useTranslation } from 'react-i18next';
-import React, { useState } from 'react';
-import CheckoutForm from '../components/CheckoutForm';
-import { useCart } from '../components/CartContext';
-import { Icon } from '@iconify/react';
-import { Notyf } from 'notyf';
-import 'notyf/notyf.min.css';
+// Checkout.jsx
+import { useTranslation } from 'react-i18next'
+import React, { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Icon } from '@iconify/react'
+import { Notyf } from 'notyf'
+import 'notyf/notyf.min.css'
+import emailjs from '@emailjs/browser'
+import { useCart } from '../components/CartContext'
+
+// Subcomponentes
+import OrderDetails from '../components/OrderDetails'
+import ShippingDetails from '../components/ShippingDetails'
+import Validations from '../components/Validations'
 
 const COUPON_MAP = {
   DISCOUNT10: 10,
   UWH15: 15,
-};
+}
+
+// Env vars (Vite)
+const EMAILJS_SERVICE = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const EMAILJS_TEMPLATE = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const EMAILJS_USER = import.meta.env.VITE_EMAILJS_USER_ID
 
 const Checkout = () => {
-  const { t } = useTranslation("global");
-  const { cartItems, removeFromCart } = useCart();
+  const { t } = useTranslation('global')
+  const navigate = useNavigate()
+  const { cartItems, removeFromCart, clearCart } = useCart()
+  const formRef = useRef(null)
 
-  // Estados de cupón
-  const [couponValue, setCouponValue] = useState('');
-  const [couponValid, setCouponValid] = useState(null); // null = untouched, true = valid, false = invalid
+  // Estados
+  const [couponValue, setCouponValue] = useState('')
+  const [discountPercent, setDiscountPercent] = useState(0)
 
-  const validateCoupon = (value) => {
-    const code = value.trim().toUpperCase();
-    return COUPON_MAP.hasOwnProperty(code) ? COUPON_MAP[code] : null;
-  };
+  const [userCountry, setUserCountry] = useState('United States of America')
+  const [zipCode, setZipCode] = useState('')
 
-  const handleCouponChange = (e) => {
-    const value = e.target.value;
-    setCouponValue(value);
-    const percent = validateCoupon(value);
-    if (value.trim() === '') {
-      setCouponValid(null);
-    } else if (percent) {
-      setCouponValid(percent);
-    } else {
-      setCouponValid(false);
-    }
-  };
+  const [shippingTotal, setShippingTotal] = useState(0)
+  const [orderTotal, setOrderTotal] = useState(0)
+  const [isCalculating, setIsCalculating] = useState(true)
+
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formValid, setFormValid] = useState(false)
 
   // Notyf
   const notyf = new Notyf({
     types: [{ type: 'error', background: '#f44336', duration: 2000, dismissible: false }],
-  });
+  })
 
   const handleRemoveFromCart = (index) => {
-    removeFromCart(index);
-    notyf.error(t('product.remove_from_cart'));
-  };
+    removeFromCart(index)
+    notyf.error(t('product.remove_from_cart'))
+  }
 
-  // Subtotal original
-  const originalSubtotal = cartItems
-    .reduce((sum, item) => sum + item.product_selling * item.quantity, 0);
+  // check validity del form
+  useEffect(() => {
+    const check = () => setFormValid(formRef.current?.checkValidity() || false)
+    check()
+    const form = formRef.current
+    if (!form) return
+    form.addEventListener('input', check)
+    return () => form.removeEventListener('input', check)
+  }, [])
 
-  // Descuento aplicado
-  const percent = typeof couponValid === 'number' ? couponValid : 0;
-  const discountedSubtotal = originalSubtotal * (1 - percent / 100);
+  // Callback que recibe OrderDetails cuando el usuario cambia el cupón
+  const handleCouponUpdate = (code, percent) => {
+    setCouponValue(code || '')
+    setDiscountPercent(percent || 0)
+  }
 
+  // Callback que recibe totals desde OrderDetails
+  const handleTotalsChange = ({ shipping, total, calculating }) => {
+    setShippingTotal(shipping ?? 0)
+    setOrderTotal(total ?? 0)
+    setIsCalculating(Boolean(calculating))
+  }
+
+  // Generar texto para email
+  const generateOrderDetailsText = () => {
+    let counter = 1
+    const lines = cartItems.flatMap((item) => {
+      const unit = Number(item.product_selling) || 0
+      return Array.from({ length: item.quantity || 1 }, () => {
+        const block = [
+          `Item ${counter++}:`,
+          `Name: ${item.product_name}`,
+          `Type: ${item.product_category || item.product_category_key || 'unknown'}`,
+          `Unit Price: $${unit.toFixed(2)}`,
+          `Size: ${item.selectedSize || '-'}`,
+          ...(item.backNumber ? [`Number: ${item.backNumber}`] : []),
+          `Total: $${unit.toFixed(2)}`,
+        ].join('\n')
+        return block
+      })
+    })
+
+    const productsSubtotal = cartItems
+      .reduce((s, it) => s + (Number(it.product_selling) || 0) * (it.quantity || 1), 0)
+      .toFixed(2)
+
+    const discountLine = discountPercent
+      ? `Coupon: ${couponValue} (${discountPercent}% off)\nTotal after discount: $${orderTotal.toFixed(2)}`
+      : `Total: $${orderTotal.toFixed(2)}`
+
+    return [...lines, `Subtotal: $${productsSubtotal}`, discountLine].join('\n\n')
+  }
+
+  // Submit
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (!formRef.current) return
+    if (!formRef.current.checkValidity() || isSubmitting) return
+    setIsSubmitting(true)
+
+    const formEl = formRef.current
+    // eliminar previos hidden autogenerados
+    Array.from(formEl.querySelectorAll('input[data-autogen="true"]')).forEach((n) => n.remove())
+
+    const details = generateOrderDetailsText()
+    const appendHidden = (name, value) => {
+      const input = document.createElement('input')
+      input.type = 'hidden'
+      input.name = name
+      input.value = value
+      input.setAttribute('data-autogen', 'true')
+      formEl.appendChild(input)
+    }
+
+    appendHidden('order_details', details)
+    appendHidden('coupon_code', couponValue || '')
+    appendHidden('order_total', orderTotal.toFixed(2))
+    appendHidden('shipping_total', shippingTotal.toFixed(2))
+    appendHidden('country_label', userCountry)
+    appendHidden('zip_code', zipCode || '')
+
+    try {
+      await emailjs.sendForm(EMAILJS_SERVICE, EMAILJS_TEMPLATE, formEl, EMAILJS_USER)
+      clearCart && clearCart()
+      navigate('/successfull')
+    } catch (err) {
+      console.error('EmailJS error:', err)
+      setIsSubmitting(false)
+    }
+  }
+
+  // Subtotal original (para mostrar tachado si hay cupón)
+  const originalSubtotal = cartItems.reduce(
+    (sum, item) => sum + (Number(item.product_selling) || 0) * (item.quantity || 1),
+    0
+  )
 
   return (
-    <div className="container flex flex-col gap-12 mx-auto px-4 sm:px-6 py-8 sm:py-12 mt-12 sm:mt-20">
-      {/* Resumen del carrito */}
-      <div className="p-4 sm:p-6 border border-gray-300 rounded-2xl bg-white flex flex-col gap-y-4 sm:gap-y-6">
-        {/* Header */}
-        <div className="w-full mt-2">
-          <h6 className="text-base sm:text-lg font-bold text-gray-600 flex items-center gap-2 sm:gap-4">
-            <Icon icon="icon-park-twotone:shopping" className="w-6 h-6 text-pink-800" />
-            {t('checkout.order_details')}
-          </h6>
-          <hr className="mt-2" />
-        </div>
+    <div className="container flex flex-col gap-12 mx-auto mt-12 sm:mt-20">
 
-        {/* Items */}
-        {cartItems.length === 0 ? (
-          <p className="text-gray-600 text-sm sm:text-base">{t('cart.empty')}</p>
-        ) : (
-          <ul className="space-y-4 sm:space-y-6">
-            {cartItems.map((item, idx) => (
-              <li key={idx} className="flex items-center gap-4 sm:gap-6 border-b border-gray-300 pb-4 sm:pb-6 last:border-b-0">
-                <img src={item.image} alt={item.product_name} className="w-16 sm:w-20 rounded-2xl object-cover" />
-                <div className="flex flex-col flex-grow">
-                  <h6 className="text-gray-600 font-medium text-sm sm:text-base">{item.product_name}</h6>
-                  <p className="text-gray-400 text-xs sm:text-sm">{item.product_category}</p>
-                  <p className="text-gray-400 text-xs sm:text-sm">{t('cart.size')}: {item.selectedSize}</p>
-                  {item.backNumber && (
-                    <p className="text-gray-400 text-xs sm:text-sm">{t('product.number')} {item.backNumber}</p>
-                  )}
-                  <p className="text-gray-400 text-xs sm:text-sm">{t('cart.pieces')}: {item.quantity}</p>
-                </div>
-                <div className="flex flex-col items-end">
-                  <span className="text-gray-600 text-xs sm:text-sm">
-                    ${(item.product_selling * item.quantity).toFixed(2)} USD
-                  </span>
-                  <button onClick={() => handleRemoveFromCart(idx)} className="text-red-500 hover:text-red-700 text-xs sm:text-sm mt-2">
-                    {t('cart.remove')}
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
+      {/* Formulario */}
+      <div>
+          <form ref={formRef} className="needs-validation grid gap-y-8" noValidate onSubmit={handleSubmit}>
+            {/* Shipping details (controlados desde este parent) */}
+            <ShippingDetails userCountry={userCountry} setUserCountry={setUserCountry} zipCode={zipCode} setZipCode={setZipCode} />
 
-        <hr className="mt-4" />
-
-        {/* Cupón y Subtotal */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
-          <div>
-            <input
-              id="discountCode"
-              type="text"
-              value={couponValue}
-              onChange={handleCouponChange}
-              placeholder={t('checkout.discount_code')}
-              className={
-                `mt-2 block w-full rounded-md border border-gray-300 px-4 py-3 text-gray-600 focus:border-pink-800 ` +
-                (couponValid === false
-                  ? 'outline outline-2 outline-red-500'
-                  : couponValid
-                  ? 'outline outline-2 outline-green-500'
-                  : '')
-              }
+            {/* Order details + Totals (OrderDetails incluye TotalsBlock) */}
+            <OrderDetails
+              onCouponUpdate={handleCouponUpdate}
+              userCountry={userCountry}
+              zipCode={zipCode}
+              discountPercent={discountPercent}
+              onTotalsChange={handleTotalsChange}
             />
-          </div>
-          <div className="text-right">
-            <div>{t("cart.subtotal_without_shipping")}</div>
-            <div className='flex justify-end gap-2'>
-              <span className={couponValid ? 'text-gray-300 line-through' : 'text-gray-600 font-semibold'}>
-              {originalSubtotal.toFixed(2)} USD
-              </span>
-              {couponValid && (
-              <span className="text-gray-600 font-semibold">
-                {discountedSubtotal.toFixed(2)} USD
-              </span>
-              )}
-            </div>
-          </div>
-        </div>
+
+            {/* Validations + submit */}
+            <Validations isSubmitting={isSubmitting} formValid={formValid} />
+          </form>
       </div>
-
-      {/* Formulario de pago */}
-      <CheckoutForm 
-        couponCode={couponValue.trim().toUpperCase()}
-        discountPercent={percent}
-        discountedTotal={discountedSubtotal}
-      />
     </div>
-  );
-};
+  )
+}
 
-export default Checkout;
+export default Checkout

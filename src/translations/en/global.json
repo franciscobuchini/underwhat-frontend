@@ -44,7 +44,7 @@
     "size": "Size",
     "pieces": "Pieces",
     "remove": "Remove",
-    "minimum_order": "Min: 2 products",
+    "minimum_order": "Min: 3 products",
     "subtotal_without_shipping": "Subtotal (without shipping):"
   },
 
@@ -168,7 +168,7 @@
       "address_number": "Address Number",
       "apartment_suite": "Apartment, Suite, etc.",
       "zip_code": "ZIP Code",
-      "relevant_shipping_info": "Relevant information for the delivery person:",
+      "relevant_shipping_info": "Relevant information for the delivery company:",
       "shipping_info_placeholder": "Back door, ring the bell, etc.",
       "relevant_forUs_info": "Relevant information for us:",
       "forUs_info_placeholder": "Let us know if you have any special requests",
@@ -178,7 +178,7 @@
       "last_name": "Last Name",
       "last_name_placeholder": "Surname",
       "email": "Email",
-      "area_code": "Area Code",
+      "area_code": "Country Area Code",
       "phone_number": "Phone Number",
       "validations": "Validations",
       "validation_text": "The payment link will be sent to the email address you provided. Please note that this email is not automatic and may take some time to be sent. Once you receive it, it means we are aware of your order. Your order will begin production once the payment has been received. By checking this box, you confirm that you have read and understood this information.",

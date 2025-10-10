@@ -37,7 +37,7 @@
     "size": "Taille",
     "pieces": "Pièces",
     "remove": "Supprimer",
-    "minimum_order": "Min: 2 products",
+    "minimum_order": "Min: 3 products",
     "subtotal_without_shipping": "Sous-total (sans frais de port):"
   },
 
@@ -160,7 +160,7 @@
       "address_number": "Numéro d'adresse",
       "apartment_suite": "Appartement, Suite, etc.",
       "zip_code": "Code postal",
-      "relevant_shipping_info": "Informations pertinentes pour le livreur:",
+      "relevant_shipping_info": "Informations pertinentes pour la société de livraison:",
       "shipping_info_placeholder": "Porte arrière, sonnez, etc.",
       "relevant_forUs_info": "Informations pertinentes pour nous:",
       "forUs_info_placeholder": "Faites-nous savoir si vous avez des demandes particulières",
@@ -170,7 +170,7 @@
       "last_name": "Nom",
       "last_name_placeholder": "Nom",
       "email": "E-mail",
-      "area_code": "Indicatif régional",
+      "area_code": "Indicatif régional du pays",  
       "phone_number": "Numéro de téléphone",
       "validations": "Validations",
       "validation_text": "Le lien de paiement sera envoyé à l'adresse e-mail fournie. Veuillez noter que cet e-mail n'est pas automatique et peut prendre un certain temps avant d'être envoyé. Une fois reçu, cela signifie que nous sommes informés de votre commande. Votre commande commencera à être traitée une fois le paiement reçu. En cochant cette case, vous confirmez avoir lu et compris ces informations.",
