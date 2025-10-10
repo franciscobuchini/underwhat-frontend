@@ -210,8 +210,8 @@ const products = [
     units_sold: 1,
   },
   {
-    product_image: "https://res.cloudinary.com/dpleitc1d/image/upload/v1752670072/rt_f_white_uz2wly.webp",
-    product_image02: "https://res.cloudinary.com/dpleitc1d/image/upload/v1752673874/rt_b_white_bdwwxw.webp",
+    product_image: "https://res.cloudinary.com/dpleitc1d/image/upload/v1760116394/F-RT-MALLORCA_oogugf.webp",
+    product_image02: "https://res.cloudinary.com/dpleitc1d/image/upload/v1760116398/B-RT-MALLORCA_wai4wd.webp",
     product_icon: "circle-flags:es-ib",
     product_name: "Mallorca UWH",
     product_category_key: "regular_tshirt",
@@ -219,7 +219,7 @@ const products = [
     product_selling: 25.98,
     product_year: 2025,
     product_team: "Mallorca",
-    product_number: "69",
+    product_number: "",
     units_sold: 1,
   },
       {
