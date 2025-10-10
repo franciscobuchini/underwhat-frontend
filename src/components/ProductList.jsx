@@ -1,6 +1,6 @@
 // src/components/ProductList.jsx
 import { useState, useEffect, useMemo, useRef, useLayoutEffect } from "react";
-import { useCart } from "./CartContext";
+import { useCart } from "./Checkout/CartContext";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 import { useTranslation } from "react-i18next";
@@ -110,7 +110,7 @@ useLayoutEffect(() => {
 }, [viewMode, i18n.language]);
 
   return (
-    <div className="flex flex-col gap-6 sm:gap-12 w-full mt-8 mb-6 sm:mt-8 sm:mb-10 px-2 sm:px-8">
+    <div className="flex flex-col gap-6 sm:gap-12 w-full mb-6 px-2 sm:px-8">
     {/* SWITCHER: Originals / Teams (con indicador animado) */}
     <div className="relative flex items-center justify-center gap-3 mb-4">
       {/* Indicador animado (background que se mueve) */}
@@ -244,7 +244,7 @@ useLayoutEffect(() => {
                   <button
                     disabled={!selectedSizes[idx]}
                     onClick={e => { e.stopPropagation(); handleAdd(product, idx); }}
-                    className={`flex-2 h-8 w-full py-2 rounded text-sm flex items-center justify-center gap-2 focus:outline-none ${!selectedSizes[idx] ? 'border border-gray-200 cursor-not-allowed text-gray-200' : 'bg-pink-800 text-white cursor-pointer'}`}
+                    className={`flex-2 h-8 w-full py-2 rounded text-sm flex items-center justify-center gap-2 focus:outline-none ${!selectedSizes[idx] ? 'border border-gray-200 cursor-not-allowed text-gray-400 bg-gray-100' : 'bg-green-500 text-white cursor-pointer'}`}
                   >
                     {t("product.add")}
                     <Icon icon="icon-park-twotone:shopping" className="w-4 h-4" />
@@ -257,7 +257,7 @@ useLayoutEffect(() => {
                 <button
                   disabled={!selectedSizes[idx]}
                   onClick={e => { e.stopPropagation(); handleAdd(product, idx); }}
-                  className={`mt-2 h-8 w-min px-6 py-2 rounded text-sm flex items-center justify-center gap-2 focus:outline-none ${!selectedSizes[idx] ? 'border border-gray-200 cursor-not-allowed text-gray-200' : 'bg-pink-800 text-white cursor-pointer'}`}
+                  className={`mt-2 h-8 w-min px-6 py-2 rounded text-sm flex items-center justify-center gap-2 focus:outline-none ${!selectedSizes[idx] ? 'border border-gray-200 cursor-not-allowed text-gray-400 bg-gray-100' : 'bg-green-500 text-white cursor-pointer'}`}
                 >
                   {t("product.add")}
                   <Icon icon="icon-park-twotone:shopping" className="w-5 h-5" />

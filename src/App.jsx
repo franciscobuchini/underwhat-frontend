@@ -2,10 +2,10 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
-import { CartProvider } from './components/CartContext';
+import { CartProvider } from './components/Checkout/CartContext';
 import Home from './pages/Home';
 import TeamOutfit from './pages/TeamOutfit';
 import FAQ from './pages/FAQ';

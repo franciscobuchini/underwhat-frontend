@@ -1,22 +1,22 @@
 // Home.jsx
-import PicGallery from '../components/PicGallery';
 import ProductList from '../components/ProductList';
 import SizesTable from '../components/SizesTable';
-import Title from '../components/Title';
 import { useTranslation } from 'react-i18next';
+import { Icon } from "@iconify/react";
 
 const Home = () => {
   const { t } = useTranslation("global");
 
+
   return (
-    <div className="container mx-auto sm:px-6 mt-2">
-      <div className="flex flex-col gap-4 sm:gap-20">
-        {/* <StatsHeader /> */}
-        <Title title={t("home.featured_products")} />
+    <div className="container mx-auto px-6 flex flex-col items-center gap-12">
+      <div className="flex flex-col gap-4 sm:gap-10">
         <ProductList />
-        <Title title={t("home.table_sizes")} />
+            <h1 className="text-3xl font-bold text-gray-600 flex items-center gap-4">
+            <Icon icon="icon-park-twotone:ruler-one" className="w-10 h-10 flex-shrink-0 text-pink-800" />
+            {t("home.table_sizes")}
+        </h1>
         <SizesTable />
-        {/* <Title title={"Gallery Pics"} /> */}
         {/* <PicGallery /> */}
       </div>
     </div>

@@ -52,7 +52,7 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="container mx-auto px-6 py-10 mt-20">
+    <div className="container mx-auto px-6 py-12 mt-20 flex flex-col items-center gap-12">
       <h1 className="text-3xl font-bold mb-10 text-gray-600 flex items-center gap-4">
         <Icon icon="icon-park-twotone:file-question" className="w-10 h-10 flex-shrink-0 text-pink-800" />
         {t("faq.title")}

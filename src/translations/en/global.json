@@ -20,6 +20,7 @@
 
   "header": {
     "logo_alt": "Underwhat Logo",
+    "now-with-free-shipping": "NOW WITH FREE SHIPPING!",
     "menu": {
       "home": "Home",
       "team": "Team Outfit",
@@ -44,8 +45,7 @@
     "size": "Size",
     "pieces": "Pieces",
     "remove": "Remove",
-    "minimum_order": "Min: 3 products",
-    "subtotal_without_shipping": "Subtotal (without shipping):"
+    "minimum_order": "Min: 3 products"
   },
 
   "stats": {
@@ -168,17 +168,17 @@
       "address_number": "Address Number",
       "apartment_suite": "Apartment, Suite, etc.",
       "zip_code": "ZIP Code",
-      "relevant_shipping_info": "Relevant information for the delivery company:",
+      "relevant_shipping_info": "Relevant information for the courier:",
       "shipping_info_placeholder": "Back door, ring the bell, etc.",
       "relevant_forUs_info": "Relevant information for us:",
-      "forUs_info_placeholder": "Let us know if you have any special requests",
+      "forUs_info_placeholder": "Special requests",
       "contact_details": "Contact Details",
       "first_name": "First Name",
       "first_name_placeholder": "Name",
       "last_name": "Last Name",
       "last_name_placeholder": "Surname",
       "email": "Email",
-      "area_code": "Country Area Code",
+      "area_code": "Area Code",
       "phone_number": "Phone Number",
       "validations": "Validations",
       "validation_text": "The payment link will be sent to the email address you provided. Please note that this email is not automatic and may take some time to be sent. Once you receive it, it means we are aware of your order. Your order will begin production once the payment has been received. By checking this box, you confirm that you have read and understood this information.",

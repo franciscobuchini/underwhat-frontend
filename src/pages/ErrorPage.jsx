@@ -7,13 +7,13 @@ function ErrorPage({ statusCode, message }) {
   const { t } = useTranslation("global");
 
   return (
-    <div className="min-h-screen flex flex-col items-center  bg-gray-50 px-4 py-20 ">
-      <div className="bg-white p-8 rounded-2xl shadow-lg max-w-md text-center">
+    <div className="min-h-screen flex flex-col items-center  bg-gray-50 px-4">
+      <div className="max-w-md text-center">
         <h1 className="text-6xl font-bold text-pink-800 mb-4">
-          {statusCode || 'Error'}
+          {statusCode}
         </h1>
         <p className="text-gray-700 mb-6 text-lg">
-          {message || '¡Vaya! Algo salió mal.'}
+          {message}
         </p>
         <button
           onClick={() => navigate('/')}

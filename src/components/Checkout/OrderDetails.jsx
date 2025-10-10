@@ -5,7 +5,6 @@ import { useCart } from './CartContext'
 import { Notyf } from 'notyf'
 import 'notyf/notyf.min.css'
 import { useTranslation } from 'react-i18next'
-import TotalsBlock from './TotalsBlock'
 
 export default function OrderDetails({ onCouponUpdate, userCountry, zipCode, discountPercent = 0, onTotalsChange }) {
   const { t } = useTranslation('global')
@@ -125,7 +124,7 @@ export default function OrderDetails({ onCouponUpdate, userCountry, zipCode, dis
         </div>
 
         <div className="text-right">
-          <div>{t('cart.subtotal_without_shipping')}</div>
+          <div>{t('cart.subtotal')}</div>
           <div className="flex justify-end gap-2">
             <span className="text-gray-600 font-semibold">{productsTotal.toFixed(2)} USD</span>
             {discountPercent ? (
@@ -133,17 +132,6 @@ export default function OrderDetails({ onCouponUpdate, userCountry, zipCode, dis
             ) : null}
           </div>
         </div>
-      </div>
-
-      {/* TotalsBlock integrado dentro de OrderDetails */}
-      <div className="mt-4">
-        <TotalsBlock
-          cartItems={cartItems}
-          shippingTotal={shippingTotal}
-          orderTotal={orderTotal}
-          isCalculating={isCalculating}
-          discountPercent={discountPercent}
-        />
       </div>
     </div>
   )

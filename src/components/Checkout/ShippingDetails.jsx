@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon } from "@iconify/react";
-import countries from "../data/Countries";
+import countries from "../../data/Countries";
 import { useTranslation } from "react-i18next";
 
 export default function ShippingDetails({
@@ -112,16 +112,29 @@ export default function ShippingDetails({
           <label className="block text-sm font-medium text-gray-600" htmlFor="email">{t("checkout.email")} *</label>
           <input id="email" name="email" type="email" required placeholder="you@example.com" className="mt-2 block w-full rounded-md border border-gray-300 px-4 py-3" />
         </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-600" htmlFor="areaCode">{t("checkout.area_code")}</label>
-            <input id="areaCode" name="areaCode" type="text" placeholder="+01" className="mt-2 block w-full rounded-md border border-gray-300 px-4 py-3" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-600" htmlFor="phone">{t("checkout.phone_number")}</label>
-            <input id="phone" name="phone" type="tel" placeholder="555 123456" className="mt-2 block w-full rounded-md border border-gray-300 px-4 py-3" />
-          </div>
-        </div>
+        <div className="flex gap-4">
+  <div className="flex-shrink-0 w-20">
+    <label className="block text-sm font-medium text-gray-600" htmlFor="areaCode">{t("checkout.area_code")}</label>
+    <input
+      id="areaCode"
+      name="areaCode"
+      type="text"
+      placeholder="+01"
+      className="mt-2 block w-full rounded-md border border-gray-300 px-4 py-3"
+      maxLength={4}
+    />
+  </div>
+  <div className="flex-1">
+    <label className="block text-sm font-medium text-gray-600" htmlFor="phone">{t("checkout.phone_number")}</label>
+    <input
+      id="phone"
+      name="phone"
+      type="tel"
+      placeholder="555 123456"
+      className="mt-2 block w-full rounded-md border border-gray-300 px-4 py-3"
+    />
+  </div>
+</div>
       </div>
       {/* Campos extra */}
       <div className="grid grid-cols-1 gap-6 mt-4">
@@ -132,7 +145,7 @@ export default function ShippingDetails({
 
         <div className="w-full">
           <label className="block text-sm font-medium text-gray-600" htmlFor="forUsInfo">{t('checkout.relevant_forUs_info')}</label>
-          <textarea id="forUsInfo" name="forUsInfo" rows="1" className="mt-2 block w-full rounded-md border border-gray-300 px-4 py-3 resize-none" placeholder={t('checkout.forUs_info_placeholder')} />
+          <textarea id="forUsInfo" name="forUsInfo" rows="1" className="mt-2 block w-full rounded-md border border-gray-300 px-4 py-3 resize-none overflow-hidden" placeholder={t('checkout.forUs_info_placeholder')} />
         </div>
       </div>
     </div>

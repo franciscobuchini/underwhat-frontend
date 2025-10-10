@@ -6,12 +6,12 @@ import { Icon } from '@iconify/react'
 import { Notyf } from 'notyf'
 import 'notyf/notyf.min.css'
 import emailjs from '@emailjs/browser'
-import { useCart } from '../components/CartContext'
+import { useCart } from '../components/Checkout/CartContext'
 
 // Subcomponentes
-import OrderDetails from '../components/OrderDetails'
-import ShippingDetails from '../components/ShippingDetails'
-import Validations from '../components/Validations'
+import OrderDetails from '../components/Checkout/OrderDetails'
+import ShippingDetails from '../components/Checkout/ShippingDetails'
+import Validations from '../components/Checkout/Validations'
 
 const COUPON_MAP = {
   DISCOUNT10: 10,
@@ -159,7 +159,7 @@ const Checkout = () => {
             {/* Shipping details (controlados desde este parent) */}
             <ShippingDetails userCountry={userCountry} setUserCountry={setUserCountry} zipCode={zipCode} setZipCode={setZipCode} />
 
-            {/* Order details + Totals (OrderDetails incluye TotalsBlock) */}
+            {/* Order details*/}
             <OrderDetails
               onCouponUpdate={handleCouponUpdate}
               userCountry={userCountry}
