@@ -24,13 +24,6 @@ export default function Validations({ isSubmitting = false, formValid = true, sh
       </div>
 
       <div className="flex items-center gap-4 mt-4">
-        <input type="checkbox" id="priceAgree" required className="h-4 cursor-pointer" />
-        <label htmlFor="priceAgree" className="text-gray-600 text-sm">
-          {t("checkout.final_price_text")}
-        </label>
-      </div>
-
-      <div className="flex items-center gap-4 mt-4">
         <input type="checkbox" id="termsAgree" required className="h-4 cursor-pointer" />
         <label htmlFor="termsAgree" className="text-gray-600 text-sm">
           <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="underline">
